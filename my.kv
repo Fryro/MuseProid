@@ -1,0 +1,140 @@
+<MainScreenWindow>
+	name: "main"
+
+	current_song: "current_song"
+	next_song: "next_song"
+	previous_song: "previous_song"
+	song_state: "song_state"
+	time_stamp_song: "time_stamp_song"
+
+	FloatLayout:
+		cols:1
+		
+		FloatLayout:
+			size: root.width, root.height/2
+
+			Label:
+				size_hint: 0.3, 0.12
+				pos_hint: {"x":0.5, "top":0.55}
+				text: "Current Song : "
+				font_size: (root.width**2 + root.height**2) / 13**4
+			Label:
+				size_hint: 0.3, 0.12
+				pos_hint: {"x":0.15, "top":0.55}
+				text: "Last Song : "
+				font_size: (root.width**2 + root.height**2) / 13**4
+			Label: 
+				size_hint: 0.3, 0.12
+				pos_hint: {"x":0.85, "top":0.55}
+				text: "Next Song : "
+				font_size: (root.width**2 + root.height**2) / 13**4
+
+		Button:
+			pos_hint: {"x":0.15, "y":0.25}
+			size_hint: 0.4, 0.1
+			font_size: (root.width**2 + root.height**2) / 17**4
+			text: "<<<"
+			on_release:
+				root.manager.transition.direction = "left"
+				root.LastSong()
+		Button:
+			pos_hint: {"x":0.85, "y":0.25}
+			size_hint: 0.4, 0.1
+			text:">>>"
+			font_size: (root.width**2 + root.height**2) / 17**4
+			on_release:
+				root.manager.transition.direction = "left"
+				root.NextSong()
+		Button:
+			pos_hint: {"x":0.5,"y":0.25}
+			size_hint: 0.35, 0.2
+			text: "|| -+- |>"
+			font_size: (root.width**2 + root.height**2) / 17**4
+			on_release:
+				root.manager.transition.direction = "left"
+				root.PausePlaySong()
+		Button:
+			pos_hint: {"x":0.5, "y":0.8}
+			size_hint: 0.3, 0.2
+			text: "To Library"
+			font_size: (root.width**2 + root.height**2) / 17**4
+			on_release:
+				root.manager.transition.direction = "right"
+				root.LibraryButton()
+
+<SongSelectionMenu>
+	name: "library"
+	
+	song: "song"
+	listS: "album"
+
+	FloatLayout:
+		Label:
+			text: "Songs"
+			font_size: (root.width**2 + root.height**2) / 13**4
+			pos_hint: {"x":0.1, "top":0.9}
+			size_hint: 0.35, 0.15
+
+		Button:
+			pos_hint:{"x":0.2, "y":0.05}
+			size_hint: 0.6, 0.2
+			font_size: (root.width**2 + root.height**2) / 13**4
+			text: "This Song"
+			on_release:
+				root.manager.transition.direction = "left"
+				root.PlayButton()
+		Button:
+			pos_hint:{"x":0.8, "y":0.05}
+			size_hint: 0.2, 0.2
+			text: "..."
+			font_size: (root.width**2 + root.height**2) / 13**4
+			on_release:
+				root.manager.transition.direction = "up"
+				root.InfoButton()
+		Button:
+			pos_hint:{"x":0.2, "y":0.5}
+			size_hint: 0.6, 0.2
+			font_size: (root.width**2 + root.height**2) / 13**4
+			text: "Back"
+			on_release:
+				root.manager.transition.direction = "left"
+				root.BackButton()
+
+<ProidMainWindow>
+	name: "info"
+
+	current_s: "current_s"
+	last_s: "last_s"
+	next_s: "next_s"
+	time_stamp_s: "time_stamp_s"
+
+	FloatLayout:
+		Label:
+			id: current_s
+			pos_hint: {"x":0.1, "top":0.7}
+			size_hint: 0.8, 0.2
+			text: ("Current Song : {}".format(current_s))
+		Label:
+			id: last_s
+			pos_hint: {"x":0.1, "top":0.9}
+			size_hint: 0.8, 0.2
+			text: ("Last Song : {}".format(last_s))
+		Label:
+			id: next_s
+			pos_hint: {"x":0.1, "top":0.5}
+			size_hint: 0.8, 0.2
+			text: ("Next Song : {}".format(next_s))
+		Label:
+			id: time_stamp_s
+			pos_hint: {"x":0.1, "top":0.68}
+			size_hint: 0.8, 0.1
+			text: ("Time Stamp : ")
+		Button:
+			pos_hint:{"x":0.2, "y":0.1}
+			size_hint: 0.6, 0.2
+			text: "Go Back"
+			on_release:
+				app.root.current = "main"
+				root.manager.transition.direction = "down"
+				root.BackButton()
+				
